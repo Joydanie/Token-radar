@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar — which pre-token protocols are worth farming</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header>
+  <div>
+    <h1>Token Radar</h1>
+    <p class="sub">Pre-token protocols, ranked by what a token would be worth — and how likely a launch is. Snapshot 2026-11-14 · <span id="counts"></span></p>
+  </div>
+  <div class="model-chip" id="model-chip"></div>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-view="board">Board</button>
+  <button class="tab" data-view="compare">Compare <span id="cmp-count"></span></button>
+  <button class="tab" data-view="method">Method &amp; validation</button>
+  <button class="tab" data-view="audit">Excluded audit</button>
+</nav>
+
+<section id="view-board" class="view">
+  <div class="controls">
+    <input id="q" type="search" placeholder="Search name or slug…" autocomplete="off">
+    <select id="cat" aria-label="Category"><option value="">All categories</option></select>
+    <select id="verdict" aria-label="Verdict">
+      <option value="">All verdicts</option><option>Farm</option><option>Watch</option><option>Skip</option>
+    </select>
+    <label class="check"><input type="checkbox" id="watch-only"> Watchlist only</label>
+    <label class="check"><input type="checkbox" id="compare-mode"> Compare mode</label>
+    <select id="sort" aria-label="Sort by">
+      <option value="value">Sort: implied value</option>
+      <option value="likelihood">Sort: launch likelihood</option>
+      <option value="expected">Sort: expected value</option>
+      <option value="tvl">Sort: TVL</option>
+      <option value="momentum">Sort: 7d momentum</option>
+      <option value="age">Sort: age</option>
+    </select>
+  </div>
+  <p class="hint" id="result-count"></p>
+  <table id="board">
+    <thead><tr>
+      <th>#</th><th>Protocol</th><th>Category</th><th>TVL</th><th>7d</th>
+      <th>Implied value</th><th>Launch odds</th><th>Verdict</th><th></th>
+    </tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+</section>
+
+<section id="view-detail" class="view" hidden>
+  <button id="back" class="btn">← Back to board</button>
+  <div id="detail"></div>
+</section>
+
+<section id="view-compare" class="view" hidden>
+  <p class="hint">Tick up to 3 rows in compare mode, then open this tab. Side by side, same figures, no hype.</p>
+  <div id="compare"></div>
+</section>
+
+<section id="view-method" class="view" hidden>
+  <h2>How the value is estimated</h2>
+  <div id="method"></div>
+  <h2>What the data says — and what it does not</h2>
+  <ul id="honesty"></ul>
+</section>
+
+<section id="view-audit" class="view" hidden>
+  <h2>Excluded audit</h2>
+  <p class="hint" id="audit-count"></p>
+  <p class="hint">These protocols record no token, but they are not standalone launches: wrapped or staked products of a token that already trades, bridges, exchanges, or versioned deployments. They are listed here so the exclusion is checkable, not hidden.</p>
+  <table><thead><tr><th>Protocol</th><th>Why it is not on the board</th></tr></thead><tbody id="audit-rows"></tbody></table>
+</section>
+
+<footer>
+  <p>Implied values are this entry's own estimates from the snapshot, not facts and not prices. A launch likelihood is a cohort score, never a launch date. Nothing here is financial advice. Data: sealed DefiLlama snapshot, 2026-11-14.</p>
+</footer>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
